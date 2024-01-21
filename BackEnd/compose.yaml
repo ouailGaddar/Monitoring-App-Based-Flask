@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: .
+    ports:
+      - 9080:8080
+      
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+  db:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb_data:/data/db
+    command: mongod --auth
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234

@@ -1,0 +1,59 @@
+/* Reset de la marge et du rembourrage par défaut */
+body, h3 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style de votre page principale */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h3 {
+    color: #4a90e2; /* Nouvelle couleur pour le titre */
+    font-size: 24px; /* Taille du texte augmentée */
+    font-weight: bold; /* Texte en gras */
+}
+
+/* Style du conteneur des boutons */
+.Button {
+    margin-top: 20px;
+}
+
+/* Style des boutons */
+button {
+    padding: 15px 30px;
+    margin: 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 8px; /* Bordure arrondie */
+}
+
+/* Style du bouton IOT (vert) */
+button:nth-child(1) {
+    background-color: green;
+    color: white;
+}
+
+/* Style du bouton End Devices (rose) */
+button:nth-child(2) {
+    background-color: pink;
+    color: white;
+}
+
+/* Style du bouton Ville (nouvelle couleur) */
+button:nth-child(3) {
+    background-color: #4a90e2;
+    color: white;
+}

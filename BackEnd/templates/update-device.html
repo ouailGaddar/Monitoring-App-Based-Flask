@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Ville</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/update.css') }}">
+</head>
+<body>
+
+<h2>Update Device</h2>
+<center>
+
+<form method="POST" action="{{ url_for('update_device_form', ip=device.ip) }}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ device.name }}" required><br>
+
+    <label for="latitude">IP:</label>
+    <input type="text" id="latitude" name="ip" value="{{ device.ip }}" required readonly><br>
+
+
+
+
+
+    <button type="submit">Update device</button>
+    {% if error_message %}
+        <div style="color: red;">{{ error_message }}</div>
+    {% endif %}
+</form>
+</center>
+</body>
+</html>

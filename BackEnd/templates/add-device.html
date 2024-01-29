@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un IoT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addStyle.css') }}" media="screen" type="text/css" />
+</head>
+<body>
+    <center>
+    <h2>Ajouter Device</h2>
+    <form action="{{ url_for('addDevice') }}" method="POST">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name" required>
+    
+        <label for="ip">IP :</label>
+        <input type="text" id="ip" name="ip" required>
+    
+        
+        {% if error_message %}
+        <div style="color: red;">{{ error_message }}</div>
+        {% endif %}
+        <!-- Bouton de soumission -->
+        <button type="submit">Ajouter Device</button>
+
+    </form>
+    </center>
+</body>
+</html>

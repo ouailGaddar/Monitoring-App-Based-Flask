@@ -1,0 +1,24 @@
+db.IOT.find()
+use db_hosts
+db.IOT.find()
+exit
+db.IOT.find()
+exit 
+db.IOT.remove({})
+db.IOT.find()
+show collections
+use db_hosts
+db.IOT.find()
+use db_hosts
+db.IOT.find()
+use db_hosts
+exite
+db.createCollection("IOT")
+clear
+show collections
+show collection
+use db_hosts
+db.users.find()
+show collections
+use db_hosts
+show dbs

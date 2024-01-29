@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/date-settings.css') }}">
+</head>
+
+<body>
+    <center>
+    <form method="post" action="/date-settings">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate" required>
+
+        <button type="submit">Show Dashboard</button>
+    </form>
+    </center>
+</body>
+</html>

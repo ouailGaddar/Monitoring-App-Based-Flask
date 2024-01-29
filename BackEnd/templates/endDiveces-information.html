@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Management</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/device-management.css') }}">
+</head>
+<body>
+
+<h2>Device Management</h2>
+
+<div class="button-container">
+    <a href="/add_device"><button>add device</button></a>
+</div>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Actions</th>
+    </tr>
+    {% for device in devices %}
+        <tr>
+            <td>{{ device.name }}</td>
+            <td>{{ device.ip }}</td>
+            <td>
+                <a href="/update_device?ip={{ device.ip }}">
+                    <button>Mettre à jour</button>
+                </a>
+                <a href="/delete_device?ip={{ device.ip }}">
+                    <button>Supprimer device</button>
+                </a>
+                <a href="/dashboardOfDevice?ip={{ device.ip }}">
+                    <button>Dashboard</button>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<!-- Modal for adding a device -->
+<div id="addDeviceModal" style="display: none;">
+    <label for="ip">IP:</label>
+    <input type="text" id="ip" name="ip" required><br>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+    <button onclick="addDevice()">Add Device</button>
+</div>
+
+<script>
+    // JavaScript logic for managing devices (similar to the previous example)
+</script>
+
+</body>
+</html>

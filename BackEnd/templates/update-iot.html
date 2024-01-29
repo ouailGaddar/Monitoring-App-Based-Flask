@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update IoT</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/update.css') }}">
+</head>
+<body>
+
+<h2>Update IoT</h2>
+<center>
+
+<form method="POST" action="{{ url_for('update_iot', mac=iot.mac) }}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ iot.name }}" required><br>
+
+    <label for="latitude">Latitude:</label>
+    <input type="number" id="latitude" name="latitude" value="{{ iot.latitude }}"  step="any" required><br>
+
+    <label for="longitude">Longitude:</label>
+    <input type="number" id="longitude" name="longitude" value="{{ iot.longitude }}"  step="any" required><br>
+
+    <!-- Add more fields if needed -->
+    {% if error_message %}
+    <div style="color: red;">{{ error_message }}</div>
+    {% endif %}
+    <button type="submit">Update IoT</button>
+</form>
+</center>
+</body>
+</html>

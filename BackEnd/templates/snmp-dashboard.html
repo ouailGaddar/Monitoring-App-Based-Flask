@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNMP Dashboard</title>
+    <!-- Include Chart.js files -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; text-align: center; padding: 20px;">
+
+    <h1 style="color: #333;">SNMP Dashboard</h1>
+
+    <div style="display: flex; justify-content: space-around;">
+
+        <!-- Donut Chart for Used and Free Memory -->
+        <div style="width: 35%; position: relative;">
+            <canvas id="memoryChart"></canvas>
+            <div id="memoryPercentage" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 20px; color: #555; font-weight: bold;"></div>
+        </div>
+
+        <!-- Bar Chart for CPU Load -->
+        <div style="width: 65%;">
+            <canvas id="cpuChart"></canvas>
+        </div>
+
+    </div>
+
+   
+    <script>
+        // Retrieve SNMP data from Flask
+        var snmpInfo = JSON.parse('{{ snmp_info | tojson | safe | replace("u\'", "\'") | replace("\'", "\"") }}');
+        
+        // Convert values to percentages
+        var usedMemoryPercentage = (snmpInfo.memory_used / snmpInfo.memory_size) * 100;
+        var freeMemoryPercentage = 100 - usedMemoryPercentage;
+    
+        // Donut Chart for Used and Free Memory
+        var memoryChart = new Chart(document.getElementById('memoryChart').getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Used Memory', 'Free Memory'],
+                datasets: [{
+                    data: [usedMemoryPercentage, freeMemoryPercentage],
+                    backgroundColor: ['#e74c3c', '#2ecc71'],
+                }]
+            },
+            options: {
+                cutout: '40%',  // Adjust the size of the hole in the middle (in percentage)
+            }
+        });
+    
+        // Display Memory Percentage on the Donut Chart
+        var ctx = document.getElementById('memoryChart').getContext('2d');
+        ctx.font = '20px Arial';
+        ctx.fillStyle = '#555';
+        ctx.textAlign = 'center';
+        ctx.fillText(usedMemoryPercentage.toFixed(2) + '%', ctx.canvas.width / 2, ctx.canvas.height / 2);
+    
+        // Convert CPU load values to numbers
+        snmpInfo.cpu_load.forEach(function (process) {
+            process['CPU Load'] = parseFloat(process['CPU Load']);
+        });
+    
+        // Bar Chart for CPU Load
+        var cpuChart = new Chart(document.getElementById('cpuChart').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: snmpInfo.cpu_load.map(function (process) {
+                    return 'Process ' + process['Process Number'];
+                }),
+                datasets: [{
+                    label: 'CPU Load',
+                    data: snmpInfo.cpu_load.map(function (process) {
+                        return process['CPU Load'];
+                    }),
+                    backgroundColor: '#3498db',
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'CPU Load',
+                    fontColor: '#333',
+                }
+            }
+        });
+    </script>
+</body>
+</html>

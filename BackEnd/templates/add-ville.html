@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addStyle.css') }}" media="screen" type="text/css" />
+    <title>Ajouter une Ville</title>
+</head>
+<body>
+<center>
+<h2>Ajouter une Ville</h2>
+
+<form id="addVilleForm" action="/ajouter_ville" method="post">
+    <label for="name">Nom de la Ville:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="latitude">Latitude:</label>
+    <input type="text" id="latitude" name="latitude" required>
+
+    <label for="longitude">Longitude:</label>
+    <input type="text" id="longitude" name="longitude" required>
+
+    <button type="submit">Ajouter</button>
+    {% if error_message %}
+    <div style="color: red;">{{ error_message }}</div>
+    {% endif %}
+</form>
+</center>
+</body>
+</html>

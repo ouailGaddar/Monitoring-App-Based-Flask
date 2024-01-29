@@ -1,0 +1,48 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Information</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/information-ville.css') }}">
+</head>
+<body>
+
+<h2>City Information</h2>
+
+<div class="button-container">
+    <a href="/add_ville"><button>Ajouter Ville</button></a>
+</div>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Actions</th>
+    </tr>
+    {% for ville in ville_data %}
+        <tr>
+            <td>{{ ville.name }}</td>
+            <td>{{ ville.latitude }}</td>
+            <td>{{ ville.longitude }}</td>
+            <td>
+                <a href="/update_ville?name={{ ville.name }}">
+                    <button>Mettre à jour</button>
+                </a>
+                <a href="/delete_ville?name={{ ville.name }}">
+                    <button>Supprimer Ville</button>
+                </a>
+                <a href="/dashboardOfVille?latitude={{ ville.latitude }}&longitude={{ ville.longitude }}">
+                    <button>Dashboard</button>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+
+     

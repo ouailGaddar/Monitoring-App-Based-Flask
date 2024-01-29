@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Information</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/information-iot.css') }}">
+</head>
+<body>
+
+<h2>IoT Information</h2>
+
+<div class="button-container">
+    <a href="/add_iot"><button>Add IoT</button></a>
+</div>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>MAC</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Actions</th>
+    </tr>
+    {% for iot in iot_data %}
+        <tr>
+            <td>
+                <a href="/iot-dashboard?mac={{ iot.mac }}">
+                    {{ iot.name }}
+                </a>
+            </td>
+            <td>{{ iot.mac }}</td>
+            <td>{{ iot.latitude }}</td>
+            <td>{{ iot.longitude }}</td>
+            <td>
+                <a href="/start-simulation?mac={{ iot.mac }}">
+                    <button>Start Simulation</button>
+                </a>
+                <a href="/stop-simulation?mac={{ iot.mac }}">
+                    <button>Stop Simulation</button>
+                </a>
+                <a href="/delete_iot?mac={{ iot.mac }}">
+                    <button>Delete IoT</button>
+                </a>
+                <a href="/update_iot?mac={{ iot.mac }}">
+                    <button>Update IoT</button>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
